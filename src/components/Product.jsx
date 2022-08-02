@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
+import NumberFormat from 'react-number-format';
 
 function Product() {
     const params = useParams();    
     const [product, setProduct] = useState()
     const [description, setDescription] = useState()
 
-
-    console.log(params)
 
     useEffect(()=>{
         axios.get(`https://api.mercadolibre.com/items/${params.itemId}`)
@@ -35,7 +34,9 @@ function Product() {
                     <div className='details__top--details'>
                         <div className='item-sold'>Nuevo - {product.sold_quantity} vendidos</div>
                         <div className='item-title'>{product.title}</div>
-                        <div className='item-price'>${product.price}</div>
+                        <div className='item-price'>
+                            <NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                        </div>
                         <button className='item-button'>Comprar</button>
                     </div>
                 </div>

@@ -3,6 +3,10 @@ import axios from "axios";
 import { change } from "../store/search/action";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
+import {useSearchParams} from 'react-router-dom';
+
+
 
 const mapStateToProps = (state) => {
     return {
@@ -12,14 +16,19 @@ const mapStateToProps = (state) => {
 
 
 function Search({text, change}) {
+    const [searchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
+
     const makeSearch = () => {
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=:${text}`)
+        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=:${searchParams.get('search')}`)
         .then((response) => {
-          console.log(response.data.results);
           setProducts([...response.data.results])
         });
     }
+
+    useEffect(() =>{
+        makeSearch();
+    },[searchParams])
 
     useEffect(() => {
         makeSearch();
@@ -31,8 +40,8 @@ function Search({text, change}) {
                 <div className="results__route">{'Electrónica, audio y video > iPod > Reproductores > iPod touch > 32GB'} </div>
                 <div className="results__container"> */}
                     {products?.length > 0 
-                        ?   products.map((product) => 
-                                <div className="results__container--product">
+                        ?   products.map((product, index) => 
+                                <div key={index} className="results__container--product">
                                     <div className="product-image">
                                         <Link to={`/items/${product.id}`}>
                                             <div>
@@ -42,7 +51,7 @@ function Search({text, change}) {
                                     </div>
                                     <div className="product-description">
                                         <div className="product-description__price">
-                                            ${product.price}
+                                            <NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                                             {product.shipping?.free_shipping && 
                                             <img src={require('../assets/ic_shipping@2x.png')} alt="free shipping" title="Free Shipping" />
                                             }

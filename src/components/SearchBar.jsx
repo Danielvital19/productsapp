@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { change } from "../store/search/action";
 import { connect } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { createSearchParams, useNavigate, Link } from "react-router-dom";
 
 
 const mapStateToProps = (state) => {
@@ -16,8 +16,12 @@ function SearchBar({text, change}) {
 
 
     const changeText = () => {
-        change(searchText);
-        navigate(`/items`);
+        navigate({
+            pathname: "items",
+            search: createSearchParams({
+                search: searchText
+            }).toString()
+        });
     }
 
     return (

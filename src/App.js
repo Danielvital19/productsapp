@@ -18,7 +18,7 @@ function App() {
               <Route path="/" element={<div/>} />
               <Route path="/items" element={<Search/>} />
               <Route path="items/:itemId" element={<Product />} />
-              <Route path="*" element={<Navigate replace to="/" />} /> 
+              {/* <Route path="*" element={<Navigate replace to="/" />} />  */}
             </Routes> 
           </div>
         </div>
