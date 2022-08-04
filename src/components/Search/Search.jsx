@@ -40,7 +40,7 @@ function Search({text, change}) {
                                 <div className="product-description__price">
                                     <NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                                     {product.shipping?.free_shipping && 
-                                    <img src={require('../assets/ic_shipping@2x.png')} alt="free shipping" title="Free Shipping" />
+                                    <img src={require('../../assets/ic_shipping@2x.png')} alt="free shipping" title="Free Shipping" />
                                     }
                                 </div>
                                 <div className="product-description__title">{product.title}</div>

@@ -8,8 +8,6 @@ import { screen } from '@testing-library/react'
 
  jest.mock('../api/api');
 
- jest.spyOn(console, 'log');
-
 describe('Products component', () => {
     it('should render the component onto the screen', () => {
         render(<Product />);
@@ -21,11 +19,6 @@ describe('Products component', () => {
  describe('Component should call ApiFetch functions', () => {
 
     it('Component call ApiFetch functions', async () =>{
-
-        const instance = new Product()
-        const spy = jest.spyOn(instance, 'getIdFromQuery');
-        spy.mockReturnValue({ itemId :'001'});
-
         ApiFetch.getItemDescription.mockResolvedValueOnce('item description mock')
         ApiFetch.getItemDetails.mockResolvedValueOnce( {
             title: 'Ipad 32 GB',
@@ -76,16 +69,5 @@ describe('Products component', () => {
 
         expect(console.error.mock.calls.length).toBe(1);
 
-    });  
-
-    it('itemIt not set on url', async () =>{
-        const instance = new Product()
-        const spy = jest.spyOn(instance, 'getIdFromQuery');
-        spy.mockReturnValue(null);
-
-    });  
-
-
-
-
+    }); 
 });

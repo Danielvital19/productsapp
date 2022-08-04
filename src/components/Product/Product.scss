@@ -1,0 +1,66 @@
+@import '../../styles/_colors.scss'; 
+@import '../../styles/_variables.scss'; 
+
+.details{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  
+    &__top{
+      display: flex;
+  
+      &--image{
+        width: 680px;
+      }
+  
+      &--details{
+        text-align: left;
+        
+        .item-sold{
+          color: #666666;
+          font-size: 14px;
+          padding-bottom: 16px;
+          padding-top: $space1;
+        }
+  
+        .item-title{
+          color: $gray4;
+          font-size: 24px;
+        }
+  
+        .item-price{
+          font-size: 46px;
+          color: $gray4;
+          padding-top: $space1;
+        }
+  
+        .item-button{
+          margin-top: 34px;
+          min-width: 13rem;
+          background-color: #3483FA;
+          color: white;
+          border: 0;
+          padding: 0.6rem;
+          border-radius: $radius-tab;
+      
+        }
+      }
+     
+    }
+  
+    &__bottom{
+      text-align: left;
+      padding: $space1;
+  
+      &--title{
+        color: #333333;
+        font-size: 28px;
+      }
+  
+      &--content{
+        color: #999999;
+        padding: $space1 0;
+        font-size: 16px;
+      }
+    }
+  }

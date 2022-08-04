@@ -1,0 +1,44 @@
+@import '../../styles/_colors.scss'; 
+@import '../../styles/_variables.scss'; 
+
+.search-bar{
+    background: $meli;
+    display: flex;
+    justify-content: center;
+  
+    &__container{
+      width: 80%;
+      padding: 0.5rem;    
+      display: flex;
+  
+      &--search-button{
+        border: 0;
+        border-radius: 0 $radius-tab $radius-tab 0;
+        width: 3rem;
+  
+        :hover{
+          cursor: pointer;
+        }
+  
+        img{
+          width: 20px !important;
+          padding: 0 !important;
+        }
+      }
+  
+      input{
+        width: -webkit-fill-available;
+        border-radius: $radius-tab 0px 0px $radius-tab;
+        border: 0;
+        height: 2.5rem;
+        font-size: 18px;
+        padding-left: 0.7rem;
+        color: $gray4;
+      }
+  
+      img{
+        padding-right: 1.6rem;
+        width: 57px;
+      }
+    }
+  }

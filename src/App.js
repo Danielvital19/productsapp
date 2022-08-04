@@ -1,8 +1,8 @@
 import './App.scss';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar/SearchBar';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Product from './components/Product';
-import Search from './components/Search';
+import Product from './components/Product/Product';
+import Search from './components/Search/Search';
 
 
 function App() {

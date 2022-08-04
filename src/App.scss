@@ -11,47 +11,7 @@ html, body, #root {
   height: 100%;
 }
 
-.search-bar{
-  background: $meli;
-  display: flex;
-  justify-content: center;
 
-  &__container{
-    width: 80%;
-    padding: 0.5rem;    
-    display: flex;
-
-    &--search-button{
-      border: 0;
-      border-radius: 0 4px 4px 0;
-      width: 3rem;
-
-      :hover{
-        cursor: pointer;
-      }
-
-      img{
-        width: 20px !important;
-        padding: 0 !important;
-      }
-    }
-
-    input{
-      width: -webkit-fill-available;
-      border-radius: 4px 0px 0px 4px;
-      border: 0;
-      height: 2.5rem;
-      font-size: 18px;
-      padding-left: 0.7rem;
-      color: $gray4;
-    }
-
-    img{
-      padding-right: 1.6rem;
-      width: 57px;
-    }
-  }
-}
 
 .results{
   display: flex;
@@ -73,7 +33,7 @@ html, body, #root {
   &__container{
     background: white;
     width: 80%;
-    border-radius: 4px;
+    border-radius: $radius-tab;
     min-width: 888px;
 
     &--product{
@@ -94,7 +54,7 @@ html, body, #root {
           object-fit: contain;
           width: 180px;
           height: 180px;
-          border-radius: 4px;
+          border-radius: $radius-tab;
         }
       }
 
@@ -135,68 +95,4 @@ html, body, #root {
   }
 
 
-}
-
-.details{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-
-  &__top{
-    display: flex;
-
-    &--image{
-      width: 680px;
-    }
-
-    &--details{
-      text-align: left;
-      
-      .item-sold{
-        color: #666666;
-        font-size: 14px;
-        padding-bottom: 16px;
-        padding-top: $space1;
-      }
-
-      .item-title{
-        color: $gray4;
-        font-size: 24px;
-      }
-
-      .item-price{
-        font-size: 46px;
-        color: $gray4;
-        padding-top: $space1;
-      }
-
-      .item-button{
-        margin-top: 34px;
-        min-width: 13rem;
-        background-color: #3483FA;
-        color: white;
-        border: 0;
-        padding: 0.6rem;
-        border-radius: 4px;
-    
-      }
-    }
-   
-  }
-
-  &__bottom{
-    text-align: left;
-    padding: $space1;
-
-    &--title{
-      color: #333333;
-      font-size: 28px;
-    }
-
-    &--content{
-      color: #999999;
-      padding: $space1 0;
-      font-size: 16px;
-    }
-  }
 }

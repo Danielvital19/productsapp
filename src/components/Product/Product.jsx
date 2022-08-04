@@ -1,8 +1,9 @@
+import './Product.scss';
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
-import { ApiFetch } from '../api/api';
-import { utils } from '../components/utils/utils.js'
+import { ApiFetch } from '../../api/api';
+import { utils } from '../../components/utils/utils.js'
 
 function Product() {
     const params = useParams();    
