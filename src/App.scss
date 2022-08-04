@@ -1,16 +1,10 @@
-@use 'styles/_colors.scss'; 
+@import 'styles/_colors.scss'; 
+@import 'styles/_variables.scss'; 
+
 
 html, body, #root {
   height: 100%;
 }
-
-$meli: #FFE600;
-$gray1: #EEEEEE;
-$gray2: #999999;
-$gray3: #666666;
-$gray4: #333333;
-$blue-meli: #3483FA;
-
 
 .App {
   text-align: center;
@@ -80,6 +74,7 @@ $blue-meli: #3483FA;
     background: white;
     width: 80%;
     border-radius: 4px;
+    min-width: 888px;
 
     &--product{
       display: flex;
@@ -161,7 +156,7 @@ $blue-meli: #3483FA;
         color: #666666;
         font-size: 14px;
         padding-bottom: 16px;
-        padding-top: 32px;
+        padding-top: $space1;
       }
 
       .item-title{
@@ -172,7 +167,7 @@ $blue-meli: #3483FA;
       .item-price{
         font-size: 46px;
         color: $gray4;
-        padding-top: 32px;
+        padding-top: $space1;
       }
 
       .item-button{
@@ -191,7 +186,7 @@ $blue-meli: #3483FA;
 
   &__bottom{
     text-align: left;
-    padding: 32px;
+    padding: $space1;
 
     &--title{
       color: #333333;
@@ -200,7 +195,7 @@ $blue-meli: #3483FA;
 
     &--content{
       color: #999999;
-      padding: 32px 0;
+      padding: $space1 0;
       font-size: 16px;
     }
   }

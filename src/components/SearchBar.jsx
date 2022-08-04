@@ -1,25 +1,18 @@
-import { useState } from "react";
-import { change } from "../store/search/action";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import { createSearchParams, useNavigate, Link } from "react-router-dom";
 
 
-const mapStateToProps = (state) => {
-    return {
-        text: state.searchReducer.text
-    }
-}
 
-function SearchBar({text, change}) {    
+function SearchBar() {    
     let navigate = useNavigate();
-    const [searchText, setSearchText] = useState('')
+    const [query, setQuery] = useState('')
 
 
-    const changeText = () => {
-        navigate({
+    const handleSearch = () => {
+        query && navigate({
             pathname: "items",
             search: createSearchParams({
-                search: searchText
+                search: query
             }).toString()
         });
     }
@@ -30,8 +23,8 @@ function SearchBar({text, change}) {
                 <Link to="/">
                     <img src={require('../assets/Logo_ML@2x.png')} />
                 </Link>
-                <input type="text" placeholder="Nunca dejes de buscar" onChange={(e) => {setSearchText(e.target.value)}} onKeyPress={(e) => {e.key === 'Enter' && changeText()}}></input>
-                <button className="search-bar__container--search-button" onClick={() => {changeText()}}>
+                <input type="text" placeholder="Nunca dejes de buscar" onInput={(e) => {setQuery(e.target.value)}} onKeyPress={(e) => {e.key === 'Enter' && handleSearch()}} data-testid="search-input"></input>
+                <button className="search-bar__container--search-button" onClick={() => {handleSearch()}} data-testid="search-button">
                     <img src={require('../assets/ic_Search@2x.png')} />
                 </button>
             </div>
@@ -39,4 +32,4 @@ function SearchBar({text, change}) {
     );
 }
 
-export default connect(mapStateToProps,{change})(SearchBar);;
+export default SearchBar;

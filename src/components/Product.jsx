@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
-import axios from 'axios';
 import NumberFormat from 'react-number-format';
+import { ApiFetch } from '../api/api';
+import { utils } from '../components/utils/utils.js'
 
 function Product() {
     const params = useParams();    
@@ -9,32 +10,47 @@ function Product() {
     const [description, setDescription] = useState()
 
 
-    useEffect(()=>{
-        axios.get(`https://api.mercadolibre.com/items/${params.itemId}`)
-        .then((response) => {
-            setProduct({...response.data})
-        });
+    const loadDescription = async(id) => {
+        try{
+            const res = await ApiFetch.getItemDescription(id);
+            if (res)
+                setDescription(res)
+        }
+        catch{
+            console.warn('Error on API')
+            utils.redirectoToErrorPage();
+        }
+    }
 
-        axios.get(`https://api.mercadolibre.com/items/${params.itemId}/description`)
-        .then((response) => {
-            setDescription(response.data.plain_text)
-        });
+    const loadDetails = async(id) => {
+        try{
+            const res = await ApiFetch.getItemDetails(id);
+            if (res)
+                setProduct(res)
+        }
+        catch{
+            console.warn('Error on API')
+            utils.redirectoToErrorPage();
+        }
+    }
+
+    useEffect(() => {
+        loadDetails(params.itemId)
+        loadDescription(params.itemId)
     },[])
 
-    console.log(description)
-
     return (
-        <div className='details'>
+        <div className='details' data-testid="item-details-container">
             {product && 
             <>
-                <div className='details__top'>
+                <div className='details__top' data-testid="product-data">
                     <div className='details__top--image'>
-                        <img src={product?.pictures[0].url}/>
+                        {<img src={product?.pictures[0].url} alt="cover"/>}
                     </div>
                     <div className='details__top--details'>
-                        <div className='item-sold'>Nuevo - {product.sold_quantity} vendidos</div>
-                        <div className='item-title'>{product.title}</div>
-                        <div className='item-price'>
+                        <div className='item-sold' data-testid="product-data-quantity">Nuevo - {product.sold_quantity} vendidos</div>
+                        <div className='item-title' data-testid="product-data-title">{product.title}</div>
+                        <div className='item-price' data-testid="product-data-price">
                             <NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                         </div>
                         <button className='item-button'>Comprar</button>
@@ -42,7 +58,7 @@ function Product() {
                 </div>
                 <div className='details__bottom'>
                     <div className='details__bottom--title'>Descripción del producto</div>
-                    <div className='details__bottom--content'>{description && description}</div>
+                    <div className='details__bottom--content' data-testid="product-data-decription">{description && description}</div>
                 </div>
             </>
         }
