@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import {useSearchParams} from 'react-router-dom';
+import { ApiFetch } from '../../api/api';
+import { utils } from '../../components/utils/utils.js'
 
-
-function Search({text, change}) {
+function Search() {
     const [searchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
 
-    const makeSearch = () => {
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=:${searchParams.get('search')}`)
-        .then((response) => {
-          setProducts([...response.data.results])
-        });
+    const makeSearch = async() => {
+        try{
+            const response = await ApiFetch.getSearchByQuery(searchParams.get('search'));
+            if (response)
+                setProducts([...response])
+        }
+        catch{
+            console.warn('Error on API')
+            utils.redirectoToErrorPage();
+        }
     }
 
     useEffect(() =>{
         makeSearch();
     },[searchParams])
-
-    useEffect(() => {
-        makeSearch();
-    }, [text])
 
     return (
         <>
